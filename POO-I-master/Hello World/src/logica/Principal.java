@@ -7,6 +7,8 @@ package logica;
 //import modelo.Pessoa;
 //import modelo.Androide;
 import modelo.Conta;
+import modelo.Livro;
+import java.util.ArrayList;
 
 /**
  *
@@ -61,13 +63,28 @@ public class Principal {
         vencedor.printAndroide();*/
         
         //Conta conta = new Conta("AntonyLuan", 100.00f, 1.00f);
-        Conta conta = new Conta("Antony Luan", 100.00f, 1.00f);
+        /*Conta conta = new Conta("Antony Luan", 100.00f, 1.00f);
         
         conta.sacar(98.00f);
         conta.depositar(100.00f);
-        conta.exibirInformacoes();
+        conta.exibirInformacoes();*/
         
-        
+        ArrayList<Livro> lista = new ArrayList();
+        Livro livro = new Livro();
+        livro.criarLivro(lista, "Joao e Maria", 20);
+        System.out.println("Parte 1\n");
+        livro.listarLivros(lista);
+        System.out.println("parte 2\n");
+        livro.setTitulo("Maria E Joao");
+        livro.setQtdPaginas(20);
+        livro.criarLivro(lista, livro.getTitulo(), livro.getQtdPaginas());
+        livro.listarLivros(lista);
+        System.out.println("Parte 3\n");
+        livro.apagarLivro(lista, 0);
+        livro.listarLivros(lista);
+        System.out.println("Parte 4\n");
+        livro.editarLivro(lista, 0, "Joao e o pé de Feijão", 30);
+        livro.listarLivros(lista);
         
     }
 }
