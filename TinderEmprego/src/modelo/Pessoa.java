@@ -45,7 +45,7 @@ public class Pessoa {
 	}
 	
 	public void setSal_desejado(float sal_desejado) {
-		if(sal_desejado < 0f) {
+		if(Float.compare(sal_desejado, this.sal_desejado) < 0) {
 			return ;
 		}
 		this.sal_desejado = sal_desejado;

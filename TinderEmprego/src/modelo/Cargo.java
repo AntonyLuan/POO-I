@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class Cargo {
+	private String nome = "";
 	private ArrayList<Conhecimento> req_desejado = new ArrayList<>();
 	private ArrayList<Conhecimento> req_minimo = new ArrayList<>();
 	private float remuneração = 0.0f;
@@ -49,6 +50,25 @@ public class Cargo {
 			return ;
 		}
 		this.remuneração = remuneração;
+	}
+
+	public Pessoa getAspirante() {
+		return aspirante;
+	}
+
+	public void setAspirante(Pessoa aspirante) {
+		this.aspirante = aspirante;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		if(nome.compareTo("") == 0) {
+			return ;
+		}
+		this.nome = nome;
 	}
 	
 }
