@@ -4,62 +4,50 @@ import java.util.ArrayList;
 
 public class Cargo {
 	private String nome = "";
-	private ArrayList<Conhecimento> req_desejado = new ArrayList<>();
-	private ArrayList<Conhecimento> req_minimo = new ArrayList<>();
-	private float remuneração = 0.0f;
-	private Pessoa aspirante = new Pessoa();
+	private ArrayList<Conhecimento> requisitos = new ArrayList<>();
+	private ArrayList<Candidato> candidatos = new ArrayList<>();
+	private float remuneracao = 0.0f;
+	private Pessoa contratado = null;
 	
+	public ArrayList<Candidato> getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(ArrayList<Candidato> candidatos) {
+		this.candidatos = candidatos;
+	}
+
 	public Cargo() {
 		
 	}
 	
-	public Cargo(ArrayList<Conhecimento> req_d, ArrayList<Conhecimento> req_m, float salario) {
-		setReq_desejado(req_d);
-		setReq_minimo(req_m);
-		setRemuneração(salario);
+	public Cargo(String nome, float salario) {
+		setNome(nome);
+		setRemuneracao(salario);
 	}
 	
-	public ArrayList<Conhecimento> getReq_desejado() {
-		return req_desejado;
+	
+	public ArrayList<Conhecimento> getRequisitos() {
+		return requisitos;
 	}
 	
-	public void setReq_desejado(ArrayList<Conhecimento> req_desejado) {
-		if(req_desejado.size() < 1) {
+	public void setRequisitos(ArrayList<Conhecimento> requisitos) {
+		if(requisitos.size() < 1) {
 			return ;
 		}
-		this.req_desejado = req_desejado;
+		this.requisitos = requisitos;
 	}
 	
-	public ArrayList<Conhecimento> getReq_minimo() {
-		return req_minimo;
+	public float getRemuneracao() {
+		return remuneracao;
 	}
 	
-	public void setReq_minimo(ArrayList<Conhecimento> req_minimo) {
-		if(req_minimo.size() < 1) {
+	public void setRemuneracao(float remuneracao) {
+		if(Float.compare(remuneracao, 0f) < 0) {
 			return ;
 		}
-		this.req_minimo = req_minimo;
+		this.remuneracao = remuneracao;
 	}
-	
-	public float getRemuneração() {
-		return remuneração;
-	}
-	
-	public void setRemuneração(float remuneração) {
-		if(remuneração < 0f) {
-			return ;
-		}
-		this.remuneração = remuneração;
-	}
-
-	public Pessoa getAspirante() {
-		return aspirante;
-	}
-
-	public void setAspirante(Pessoa aspirante) {
-		this.aspirante = aspirante;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -69,6 +57,35 @@ public class Cargo {
 			return ;
 		}
 		this.nome = nome;
+	}
+	
+	public void  addRequisito(Conhecimento c) {
+		getRequisitos().add(c);
+	}
+
+	public Pessoa getContratado() {
+		return contratado;
+	}
+
+	public void setContratado(Pessoa contratado) {
+		this.contratado = contratado;
+	}
+	
+	public void analisarChance(Pessoa pessoa) {
+		Candidato candidato = new Candidato(pessoa);
+		float chance = (100.0f/(float)getRequisitos().size())/2;
+		for(Conhecimento r : getRequisitos()) {
+			for(Conhecimento c : candidato.getCurriculo()) {
+				if(r.getNome().compareToIgnoreCase(c.getNome()) == 0) {
+					candidato.setChance(candidato.getChance()+ (chance));
+					if(r.getExperiencia() <= c.getExperiencia()) {
+						candidato.setChance(candidato.getChance()+ (chance));
+					}
+				}
+			}
+		}
+		candidatos.add(candidato);
+		
 	}
 	
 }

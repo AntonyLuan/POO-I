@@ -27,4 +27,21 @@ public class Empresa {
 	public void addCargo(Cargo c) {
 		this.cargos.add(c);
 	}
+	
+	public void exibirTudo() {
+		for(Cargo cargo : this.cargos) {
+			System.out.println(cargo.getNome()+":\n\tRequisitos:");
+			for(Conhecimento req : cargo.getRequisitos()) {
+				System.out.println("\t\t" + req.getNome() + " " + req.getExperiencia() + " anos");
+			}
+		}
+	}
+
+	public ArrayList<Cargo> getCargos() {
+		return cargos;
+	}
+
+	public void setCargos(ArrayList<Cargo> cargos) {
+		this.cargos = cargos;
+	}
 }

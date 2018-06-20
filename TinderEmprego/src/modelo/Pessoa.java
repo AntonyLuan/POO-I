@@ -6,15 +6,17 @@ public class Pessoa {
 	private String nome = "";
 	private ArrayList<Conhecimento> curriculo = new ArrayList<>();
 	private float sal_desejado = 0f;
-	private Cargo recomendado = new Cargo();
+
+	public void setCurriculo(ArrayList<Conhecimento> curriculo) {
+		this.curriculo = curriculo;
+	}
 	
 	public Pessoa() {
 		
 	}
 	
-	public Pessoa(String nome, ArrayList<Conhecimento> curriculo, float sal_desejado) {
+	public Pessoa(String nome, float sal_desejado) {
 		setNome(nome);
-		setCurriculo(curriculo);
 		setSal_desejado(sal_desejado);
 	}
 	
@@ -33,11 +35,11 @@ public class Pessoa {
 		return curriculo;
 	}
 	
-	public void setCurriculo(ArrayList<Conhecimento> curriculo) {
-		if(curriculo.isEmpty()) {
+	public void addToCurriculo(Conhecimento conhecimento) {
+		if(conhecimento.getNome().compareTo("") == 0) {
 			return ;
 		}
-		this.curriculo = curriculo;
+		getCurriculo().add(conhecimento);
 	}
 	
 	public float getSal_desejado() {
@@ -51,15 +53,11 @@ public class Pessoa {
 		this.sal_desejado = sal_desejado;
 	}
 	
-	public Cargo getRecomendado() {
-		return recomendado;
-	}
-	
-	public void setRecomendado(Cargo recomendado) {
-		if(recomendado.getReq_minimo().isEmpty()) {
-			return ;
+	public void printPessoa() {
+		System.out.println(getNome() + ": ");
+		for(Conhecimento c : this.curriculo) {
+			System.out.println("\t" + c.getNome() + "\t" + c.getExperiencia() + " anos");
 		}
-		this.recomendado = recomendado;
 	}
 	
 }
